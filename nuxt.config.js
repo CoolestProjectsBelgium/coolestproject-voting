@@ -65,6 +65,12 @@ export default {
   build: {
   },
 
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.NUXT_ENV_BASE_URL
+    }
+  },
+
   auth: {
     strategies: {
       local: {
