@@ -2,7 +2,7 @@
   <div>
     <div class="pt-3 pb-3">
       <b-button variant="info" block @click="$emit('next')">
-        Next Project
+        Skip Project
       </b-button>
     </div>
     <b-overlay rounded="sm">
