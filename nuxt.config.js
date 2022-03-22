@@ -51,7 +51,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
+    baseURL: process.env.BACKENDURL
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -67,7 +67,7 @@ export default {
 
   publicRuntimeConfig: {
     axios: {
-      browserBaseURL: process.env.NUXT_ENV_BASE_URL
+      browserBaseURL: process.env.BACKENDURL
     }
   },
 
@@ -75,21 +75,19 @@ export default {
     strategies: {
       local: {
         token: {
-          property: 'token',
-          global: true,
-          // required: true,
-          // type: 'Bearer'
-        },
-        user: {
-          property: 'user',
-          // autoFetch: true
+          property: 'jwt',
+          global: true
         },
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post' },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get' }
+          login: { url: '/voting/auth/login', method: 'post' },
+          logout: { url: '/voting/auth/logout', method: 'post' },
+          user: { url: '/voting/auth/user', method: 'get' }
         }
       }
-    }
+    },
+    redirect: {
+      logout: '/login'
+    },
+    watchLoggedIn: true
   }
 }

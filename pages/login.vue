@@ -1,24 +1,28 @@
 <template>
   <div>
-    <form @submit.prevent="userLogin">
-      <div>
-        <label>Username</label>
-        <input type="text" v-model="login.username" />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="text" v-model="login.password" />
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <b-container fluid>
+      <b-form class="p-3" @submit.prevent="userLogin">
+        <b-form-group
+          id="input-group-1"
+          label="Username:"
+          label-for="input-1"
+        >
+          <b-form-input v-model="login.username" type="text" /></b-form-input>
+        </b-form-group>
+        <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+          <b-form-input v-model="login.password" type="password" /></b-form-input>
+        </b-form-group>
+        <b-button type="submit" variant="primary" block>
+          Submit
+        </b-button>
+      </b-form>
+    </b-container>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       login: {
         username: '',
@@ -27,13 +31,8 @@ export default {
     }
   },
   methods: {
-    async userLogin() {
-      try {
-        let response = await this.$auth.loginWith('local', { data: this.login })
-        console.log(response)
-      } catch (err) {
-        console.log(err)
-      }
+    async userLogin () {
+      await this.$auth.loginWith('local', { data: this.login })
     }
   }
 }
