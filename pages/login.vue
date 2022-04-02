@@ -7,12 +7,12 @@
           label="Username:"
           label-for="input-1"
         >
-          <b-form-input v-model="login.username" type="text" /></b-form-input>
+          <b-form-input v-model="login.username" type="text" size="lg" /></b-form-input>
         </b-form-group>
         <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-          <b-form-input v-model="login.password" type="password" /></b-form-input>
+          <b-form-input v-model="login.password" type="password" size="lg" /></b-form-input>
         </b-form-group>
-        <b-button type="submit" variant="primary" block>
+        <b-button type="submit" variant="primary" size="lg" block>
           Submit
         </b-button>
       </b-form>

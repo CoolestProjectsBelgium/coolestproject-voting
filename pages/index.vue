@@ -15,7 +15,7 @@ export default {
     }
   },
   async fetch () {
-    this.project = await this.$axios.$get('/voting/projects')
+    await this.submitNext()
   },
   methods: {
     async submitResult (event) {
@@ -26,7 +26,7 @@ export default {
       await this.$axios.$post('/voting/projects/' + event.project_id, votes)
     },
     async submitNext () {
-      this.project = await this.$axios.$get('/voting/projects')
+      this.project = await this.$axios.$get('/voting/projects', { params: { languages: JSON.stringify(this.$store.state.languages) } })
     }
   }
 }
