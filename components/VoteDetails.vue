@@ -18,7 +18,7 @@
       </b-card>
     </b-overlay>
     <b-form class="pt-3" @submit.prevent="submitResult" @reset="resetResult">
-      <b-form-group v-for="cat in value.categories" id="input-group-1" :key="cat.id + ''" :label="cat.title">
+      <b-form-group v-for="cat in value.categories" id="input-group-1" :key="cat.id + ''" :label="cat.name">
         <b-form-rating :id="cat.id + ''" v-model="cat.value" size="lg" :show-clear="cat.optional" :stars="cat.max" />
       </b-form-group>
       <div>
