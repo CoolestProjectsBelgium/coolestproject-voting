@@ -50,7 +50,7 @@ export default {
   methods: {
     async nextProject () {
       let result = true
-      if (this.value.categories.some(item => !item.optional && item.value !== 0)) {
+      if (this.value.categories.some(item => !item.optional && !item.value)) {
         result = await this.$bvModal.msgBoxConfirm('Do you want to skip to the next project',
           { centered: true, title: 'Confirm', buttonSize: 'lg' })
       }
@@ -62,7 +62,7 @@ export default {
       const data = { ...this.value }
       let result = true
       // check if all mandatory values are filled in
-      if (this.value.categories.some(item => !item.optional && item.value === 0)) {
+      if (this.value.categories.some(item => !item.optional && !item.value)) {
         result = await this.$bvModal.msgBoxConfirm('All Mandatory categories are not filled in, are you sure to submit ?',
           { centered: true, headerBgVariant: 'warning', title: 'Confirm', buttonSize: 'lg' })
       }

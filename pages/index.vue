@@ -24,6 +24,7 @@ export default {
         votes.push({ id: vote.id, value: vote.value })
       }
       await this.$axios.$post('/voting/projects/' + event.project_id, votes)
+      await this.submitNext()
     },
     async submitNext () {
       this.project = await this.$axios.$get('/voting/projects', { params: { languages: JSON.stringify(this.$store.state.languages) } })
