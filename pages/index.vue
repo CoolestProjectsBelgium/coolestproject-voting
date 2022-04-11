@@ -28,6 +28,11 @@ export default {
     },
     async submitNext () {
       this.project = await this.$axios.$get('/voting/projects', { params: { languages: JSON.stringify(this.$store.state.languages) } })
+      if (this.project.message === 'finished') {
+        this.$router.push({
+          path: 'finished'
+        })
+      }
     }
   }
 }
