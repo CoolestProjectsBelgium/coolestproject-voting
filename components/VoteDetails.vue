@@ -50,7 +50,7 @@ export default {
   methods: {
     async nextProject () {
       let result = true
-      if (this.value.categories.some(item => !item.optional && !item.value)) {
+      if (this.value.categories.some(item => !item.optional && item.value)) {
         result = await this.$bvModal.msgBoxConfirm('Do you want to skip to the next project',
           { centered: true, title: 'Confirm', buttonSize: 'lg' })
       }
