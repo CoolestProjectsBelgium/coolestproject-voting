@@ -24,6 +24,7 @@ export default {
         votes.push({ id: vote.id, value: vote.value })
       }
       await this.$axios.$post('/voting/projects/' + event.project_id, votes)
+      this.$toast.success('votes recieved')
       await this.submitNext()
     },
     async submitNext () {

@@ -32,7 +32,11 @@ export default {
   },
   methods: {
     async userLogin () {
-      await this.$auth.loginWith('local', { data: this.login })
+      try {
+        await this.$auth.loginWith('local', { data: this.login })
+      } catch (error) {
+        this.$toast.error('login failed')
+      }
     }
   }
 }
