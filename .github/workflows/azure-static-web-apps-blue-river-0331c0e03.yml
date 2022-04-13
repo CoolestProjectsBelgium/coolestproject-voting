@@ -18,9 +18,21 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+          
+      - name: Set up Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      - name: npm install, build, and test
+        run: npm ci
+        
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
+        env:
+          NUXT_ENV_BASE_URL: "https://backend.coolestprojects.be/"
+          NUXT_ENV_DOMAIN: "coolestprojects.be"
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_RIVER_0331C0E03 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
