@@ -28,12 +28,18 @@ export default {
       await this.submitNext()
     },
     async submitNext () {
+      if (!this.$store.state.localStorage.languages) {
+        this.$router.push({
+          path: 'language'
+        })
+      }
       this.project = await this.$axios.$get('/voting/projects', { params: { languages: JSON.stringify(this.$store.state.localStorage.languages) } })
       if (this.project.message === 'finished') {
         this.$router.push({
           path: 'finished'
         })
       }
+      window.scrollTo(0, 0)
     }
   }
 }
