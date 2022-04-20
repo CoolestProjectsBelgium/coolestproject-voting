@@ -24,14 +24,15 @@ export default {
         votes.push({ id: vote.id, value: vote.value })
       }
       await this.$axios.$post('/voting/projects/' + event.project_id, votes)
-      this.$toast.success('votes recieved', { duration: 2000 })
+      this.$toast.success('Vote received', { duration: 2000 })
       await this.submitNext()
     },
     async submitNext () {
-      if (!this.$store.state.localStorage.languages) {
+      if (!this.$store.state.localStorage.languages || this.$store.state.localStorage.languages.length === 0) {
         this.$router.push({
           path: 'language'
         })
+        return
       }
       this.project = await this.$axios.$get('/voting/projects', { params: { languages: JSON.stringify(this.$store.state.localStorage.languages) } })
       if (this.project.message === 'finished') {
