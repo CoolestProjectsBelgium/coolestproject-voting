@@ -90,6 +90,7 @@ export default {
     redirect: {
       logout: '/login'
     },
-    watchLoggedIn: true
+    watchLoggedIn: true,
+    devServerHandlers: []
   }
 }
