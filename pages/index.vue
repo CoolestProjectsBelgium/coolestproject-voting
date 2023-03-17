@@ -38,7 +38,12 @@ export default {
         })
         return
       }
-      this.project = await this.$axios.$get('/voting/projects', { params: { languages: JSON.stringify(this.$store.state.localStorage.languages) } })
+      this.project = await this.$axios.$get('/voting/projects', {
+        params: {
+          languages: JSON.stringify(this.$store.state.localStorage.languages),
+          skipProject: this.project.id
+        }
+      })
       if (this.project.message === 'finished') {
         this.$router.push({
           path: 'finished'
