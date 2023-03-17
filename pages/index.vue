@@ -15,7 +15,11 @@ export default {
     }
   },
   async fetch () {
-    await this.submitNext()
+    if (!this.$store.state.localStorage.current_project) {
+      await this.submitNext()
+    } else {
+      this.project = structuredClone(this.$store.state.localStorage.current_project)
+    }
   },
   methods: {
     async submitResult (event) {
@@ -40,6 +44,7 @@ export default {
           path: 'finished'
         })
       }
+      this.$store.commit('localStorage/updateProject', structuredClone(this.project))
       window.scrollTo(0, 0)
     }
   }
