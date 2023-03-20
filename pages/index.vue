@@ -41,7 +41,7 @@ export default {
       this.project = await this.$axios.$get('/voting/projects', {
         params: {
           languages: JSON.stringify(this.$store.state.localStorage.languages),
-          skipProject: this.project.id
+          skipProject: this.project.project_id
         }
       })
       if (this.project.message === 'finished') {
