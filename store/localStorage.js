@@ -1,6 +1,6 @@
 export const state = () => ({
   languages: [],
-  current_project: null
+  project: null
 })
 
 export const mutations = {
@@ -8,6 +8,6 @@ export const mutations = {
     state.languages = languages
   },
   updateProject (state, project) {
-    state.current_project = project
+    state.project = project
   }
 }

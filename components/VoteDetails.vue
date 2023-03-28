@@ -18,8 +18,15 @@
       </b-card>
     </b-overlay>
     <b-form class="pt-3" @submit.prevent="submitResult" @reset="resetResult">
-      <b-form-group v-for="cat in value.categories" id="input-group-1" :key="cat.id + ''" :label="cat.name">
-        <b-form-rating :id="cat.id + ''" v-model="cat.value" size="lg" :show-clear="cat.optional" :stars="cat.max" />
+      <b-form-group v-for="(cat, index) in value.categories" id="input-group-1" :key="cat.id + ''" :label="cat.name">
+        <b-form-rating
+          :id="cat.id + ''"
+          :value="cat.value"
+          size="lg"
+          :show-clear="cat.optional"
+          :stars="cat.max"
+          @change="v => change(index, v)"
+        />
       </b-form-group>
       <div>
         <b-button type="submit" variant="primary" size="lg" block>
@@ -41,13 +48,18 @@ export default {
       default: () => {}
     }
   },
-  emits: ['submit'],
+  // emits: ['update:project'],
   data () {
     return {
       result: {}
     }
   },
   methods: {
+    change (id, value) {
+      const data = { ...this.value }
+      data.categories[id].value = value
+      this.$emit('update:modelValue', data)
+    },
     async nextProject () {
       let result = true
       if (this.value.categories.some(item => !item.optional && item.value)) {
