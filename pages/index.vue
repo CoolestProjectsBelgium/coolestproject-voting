@@ -16,7 +16,9 @@ export default {
     return {}
   },
   async fetch () {
-    await this.submitNext()
+    if (!this.$store.state.localStorage.project) {
+      await this.submitNext()
+    }
   },
   computed: {
     project: {
@@ -45,16 +47,18 @@ export default {
         })
         return
       }
-      this.project = await this.$axios.$get('/voting/projects', {
+      const project = await this.$axios.$get('/voting/projects', {
         params: {
           languages: JSON.stringify(this.$store.state.localStorage.languages),
           skipProject: this.project?.project_id
         }
       })
-      if (this.project.message === 'finished') {
+      if (project.message === 'finished') {
         this.$router.push({
           path: 'finished'
         })
+      } else {
+        this.project = project
       }
       window.scrollTo(0, 0)
     }

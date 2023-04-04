@@ -48,7 +48,6 @@ export default {
       default: () => {}
     }
   },
-  // emits: ['update:project'],
   data () {
     return {
       result: {}
@@ -58,7 +57,7 @@ export default {
     change (id, value) {
       const data = { ...this.value }
       data.categories[id].value = value
-      this.$emit('update:modelValue', data)
+      this.$emit('input', data)
     },
     async nextProject () {
       let result = true
