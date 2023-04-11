@@ -54,6 +54,7 @@ export default {
         }
       })
       if (project.message === 'finished') {
+        this.project = null
         this.$router.push({
           path: 'finished'
         })
