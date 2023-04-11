@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     set_languages () {
+      this.$store.commit('localStorage/updateProject', null)
       this.$store.commit('localStorage/updateLanguages', this.selected)
       this.$router.push('/')
     }
