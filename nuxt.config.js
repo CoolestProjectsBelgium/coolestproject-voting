@@ -30,7 +30,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build'
+    // '@nuxt/typescript-build'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -90,6 +90,7 @@ export default {
     redirect: {
       logout: '/login'
     },
-    watchLoggedIn: true
+    watchLoggedIn: true,
+    devServerHandlers: []
   }
 }

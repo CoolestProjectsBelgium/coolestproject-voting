@@ -2,7 +2,10 @@
   <div>
     <NavBar />
     <b-container fluid>
-      <VoteDetails v-model="project" @submit="submitResult" @next="submitNext" />
+      <VoteDetails v-if="project" v-model="project" @submit="submitResult" @next="submitNext" />
+      <p v-else>
+        Error please refresh
+      </p>
     </b-container>
   </div>
 </template>
@@ -10,12 +13,22 @@
 <script>
 export default {
   data () {
-    return {
-      project: {}
-    }
+    return {}
   },
   async fetch () {
-    await this.submitNext()
+    if (!this.$store.state.localStorage.project) {
+      await this.submitNext()
+    }
+  },
+  computed: {
+    project: {
+      set (p) {
+        this.$store.commit('localStorage/updateProject', structuredClone(p))
+      },
+      get () {
+        return structuredClone(this.$store.state.localStorage.project)
+      }
+    }
   },
   methods: {
     async submitResult (event) {
@@ -34,11 +47,19 @@ export default {
         })
         return
       }
-      this.project = await this.$axios.$get('/voting/projects', { params: { languages: JSON.stringify(this.$store.state.localStorage.languages) } })
-      if (this.project.message === 'finished') {
+      const project = await this.$axios.$get('/voting/projects', {
+        params: {
+          languages: JSON.stringify(this.$store.state.localStorage.languages),
+          skipProject: this.project?.project_id
+        }
+      })
+      if (project.message === 'finished') {
+        this.project = null
         this.$router.push({
           path: 'finished'
         })
+      } else {
+        this.project = project
       }
       window.scrollTo(0, 0)
     }
